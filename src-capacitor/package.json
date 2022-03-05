@@ -1,0 +1,12 @@
+{
+  "name": "app-correios",
+  "version": "0.0.1",
+  "description": "APP de estudo utilizando api de rastreio dos correios",
+  "author": "Iober Henrique <iober.hc@gmail.com>",
+  "private": true,
+  "dependencies": {
+    "@capacitor/android": "^2.5.0",
+    "@capacitor/cli": "^2.0.0",
+    "@capacitor/core": "^2.0.0"
+  }
+}
