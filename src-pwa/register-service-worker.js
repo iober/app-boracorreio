@@ -1,35 +1,40 @@
 import { register } from "register-service-worker";
 import { Notify } from "quasar";
+
 // The ready(), registered(), cached(), updatefound() and updated()
 // events passes a ServiceWorkerRegistration instance in their arguments.
 // ServiceWorkerRegistration: https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration
 
-register("firebase-messaging-sw.js", {
+register(process.env.SERVICE_WORKER_FILE, {
   // The registrationOptions object will be passed as the second argument
   // to ServiceWorkerContainer.register()
   // https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerContainer/register#Parameter
 
   // registrationOptions: { scope: './' },
 
-  ready(/* registration */) {},
+  ready(/* registration */) {
+    // console.log('Service worker is active.')
+  },
 
-  registered(/* registration */) {},
+  registered(/* registration */) {
+    // console.log('Service worker has been registered.')
+  },
 
-  cached(/* registration */) {},
+  cached(/* registration */) {
+    // console.log('Content has been cached for offline use.')
+  },
 
-  updatefound(registration) {
+  updatefound(/* registration */) {
     Notify.create({
       message: "Por Favor aguarde. Atualização em andamento...",
-      color: "red-9",
+      color: "primary",
       timeout: 0,
       position: "top",
     });
   },
 
-  updated(registration) {
-    setTimeout(() => {
-      window.location.reload(true);
-    }, 3000);
+  updated(/* registration */) {
+    window.location.reload(true);
   },
 
   offline() {

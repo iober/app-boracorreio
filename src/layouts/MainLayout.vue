@@ -5,7 +5,14 @@
         <q-avatar>
           <img stretch flat src="../statics/logo.png" />
         </q-avatar>
-        <q-toolbar-title>Rastreamento de Objetos</q-toolbar-title>
+        <q-toolbar-title style="font-size: 16px" class="text-subtitle2"
+          >Rastreamento de Objetos</q-toolbar-title
+        >
+        <div v-if="this.$route.name == 'index'">
+          <q-avatar @click="logoutUser" class="cursor-pointer">
+            <q-icon name="logout" />
+          </q-avatar>
+        </div>
       </q-toolbar>
     </q-header>
 
@@ -34,6 +41,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 import EssentialLink from "components/EssentialLink.vue";
 
 const linksList = [
@@ -82,7 +90,7 @@ const linksList = [
 ];
 
 import { defineComponent, ref } from "vue";
-
+import { firebase } from "boot/firebase";
 export default defineComponent({
   name: "MainLayout",
 
@@ -94,12 +102,20 @@ export default defineComponent({
     const leftDrawerOpen = ref(false);
 
     return {
+      visible: ref(false),
       essentialLinks: linksList,
       leftDrawerOpen,
-      toggleLeftDrawer() {
-        leftDrawerOpen.value = !leftDrawerOpen.value;
-      },
+      user: ref("OFF"),
     };
+  },
+  created() {
+    firebase.auth().onAuthStateChanged((user) => {
+      this.$q.sessionStorage.set("uid_c", user.uid);
+      this.$q.sessionStorage.set("name_c", user.displayName);
+    });
+  },
+  methods: {
+    ...mapActions("auth", ["logoutUser"]),
   },
 });
 </script>

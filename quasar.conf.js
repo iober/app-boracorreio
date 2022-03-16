@@ -42,7 +42,8 @@ module.exports = configure(function (ctx) {
 
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
-      vueRouterMode: "hash", // available values: 'hash', 'history'
+      scopeHoisting: true,
+      vueRouterMode: "history",
 
       // transpile: false,
       // publicPath: '/',
@@ -94,7 +95,13 @@ module.exports = configure(function (ctx) {
       // directives: [],
 
       // Quasar plugins
-      plugins: ["LocalStorage", "SessionStorage", "Loading", "Notify"],
+      plugins: [
+        "LocalStorage",
+        "SessionStorage",
+        "Loading",
+        "Notify",
+        "Dialog",
+      ],
     },
 
     // animations: 'all', // --- includes all animations
@@ -128,8 +135,10 @@ module.exports = configure(function (ctx) {
 
     // https://quasar.dev/quasar-cli/developing-pwa/configuring-pwa
     pwa: {
-      workboxPluginMode: "GenerateSW", // 'GenerateSW' or 'InjectManifest'
-      workboxOptions: {}, // only for GenerateSW
+      workboxOptions: {
+        skipWaiting: true,
+        clientsClaim: true,
+      },
 
       // for the custom service worker ONLY (/src-pwa/custom-service-worker.[js|ts])
       // if using workbox in InjectManifest mode
@@ -140,7 +149,7 @@ module.exports = configure(function (ctx) {
       },
 
       manifest: {
-        name: `borCorreio`,
+        name: `Bora Correio`,
         short_name: `Bora Correio`,
         description: `APP de estudo utilizando api de rastreio dos correios`,
         display: "standalone",

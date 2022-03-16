@@ -2,7 +2,7 @@
   "name": "app-correios",
   "version": "0.0.1",
   "description": "APP de estudo utilizando api de rastreio dos correios",
-  "productName": "Quasar App",
+  "productName": "Bora Correio",
   "author": "Iober Henrique <iober.hc@gmail.com>",
   "private": true,
   "scripts": {
@@ -12,9 +12,10 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
+    "ajv": "^6.9.1",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
-    "firebase": "^9.6.7",
+    "firebase": "^9.6.8",
     "firebaseui": "^6.0.1",
     "quasar": "^2.0.0",
     "vue": "^3.0.0",
@@ -29,7 +30,7 @@
     "eslint-plugin-vue": "^7.0.0",
     "eslint-webpack-plugin": "^2.4.0",
     "prettier": "^2.5.1",
-    "workbox-webpack-plugin": "^6.5.0"
+    "workbox-webpack-plugin": "^6.5.1"
   },
   "browserslist": [
     "last 10 Chrome versions",
