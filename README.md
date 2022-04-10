@@ -1,37 +1,27 @@
-# Quasar App (app-correios)
+# Projeto utilizando Quasar Framework + Firebase Realtime Database + Google Firebase Auth
 
-APP de estudo utilizando api de rastreio dos correios
+APP de estudo utilizando api de rastreio dos correios e Firebase Realtime Database
 
-## Install the dependencies
+## Clone o projeto e rode o comando:
 
 ```bash
 npm install
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
+## Configure os dados do firebase:
+
+```bash
+Configurar chave de acesso no arquivo src/firebaseInit.js e boot/firebase.js
+```
+
+### Para iniciar o app, rode o comando:
 
 ```bash
 quasar dev
 ```
 
-### Lint the files
+### Mais informações em:
 
 ```bash
-npm run lint
+https://quasar.dev/start
 ```
-
-### Format the files
-
-```bash
-npm run format
-```
-
-### Build the app for production
-
-```bash
-quasar build
-```
-
-### Customize the configuration
-
-See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).

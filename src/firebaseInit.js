@@ -9,13 +9,13 @@ import firebase from "firebase/app";
 // Your web app's Firebase configuration
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCXhNvooWyug6ErVMGRpkG0aW9TIlbmRRg",
-  authDomain: "boracorreio.firebaseapp.com",
-  databaseURL: "https://boracorreio-default-rtdb.firebaseio.com",
-  projectId: "boracorreio",
-  storageBucket: "boracorreio.appspot.com",
-  messagingSenderId: "201260435694",
-  appId: "1:201260435694:web:fcf355b20e4cfeb8070bff",
+  apiKey: "",
+  authDomain: "",
+  databaseURL: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
 };
 
 export default firebase.initializeApp(firebaseConfig);

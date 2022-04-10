@@ -14,16 +14,7 @@
               maxlength="20"
               dense
               style="border: 30px; max-width: 500px"
-            >
-              <!-- <template v-slot:append>
-                <q-icon
-                  v-if="codRastreio"
-                  name="save"
-                  class="cursor-pointer"
-                  @click="salvarCodigo()"
-                />
-              </template> -->
-            </q-input>
+            />
           </div>
           <div class="col-xs-12 col-sm-8 col-md-8 col-lg-5">
             <q-btn
@@ -84,15 +75,6 @@
             </q-item>
           </q-list>
         </div>
-        <!-- <q-btn
-          color="red-5 q-mt-sm"
-          icon="clear"
-          outline
-          label="Limpar Tudo"
-          dense
-          class="full-width"
-          @click="limparHistorico()"
-        /> -->
       </div>
       <div style="max-width: 500px" class="q-pt-sm" v-if="pesquisou == true">
         <q-list bordered v-for="(e, index) in dadosEncomenda" :key="e" dense>
@@ -155,35 +137,11 @@
                 {{ e.unidadeDestino.endereco.uf }} <br />
               </q-item-label>
             </q-item-section>
-            <!--
-            <q-item-section side top>
-              <q-item-label caption>5 min ago</q-item-label>
-              <q-icon name="star" color="yellow" />
-            </q-item-section> -->
           </q-item>
         </q-list>
       </div>
       <br /><br />
     </div>
-    <!-- <div class="absolute-bottom q-pa-md text-center">
-      <span style="font-size: x-small"
-        ><q-icon name="copyright" />Desenvolvido por
-        <a href="https://github.com/iober" target="_blank">
-          Iober Henrique da Cruz</a
-        ></span
-      >
-    </div> -->
-
-    <!-- <div>
-      <q-list bordered v-for="d in dados" :key="d">
-        <q-item clickable v-ripple v-if="d.uid == uid">
-          <q-item-section avatar>
-            <q-icon color="primary" name="bluetooth" />
-          </q-item-section>
-          <q-item-section>{{ d.codigo }}</q-item-section>
-        </q-item>
-      </q-list>
-    </div> -->
     <q-dialog v-model="salvaCodigodlg" persistent>
       <q-card style="min-width: 300px">
         <q-card-section class="q-pt-lg">
@@ -257,45 +215,11 @@ export default defineComponent({
   created() {
     this.user = this.$q.sessionStorage.getItem("name_c");
     this.uid = this.$q.sessionStorage.getItem("uid_c");
-    // Example: 501e7ae1-7e6f-b923-3e84-4e946bff31a8
     this.atualizar();
-    // db.ref("codigos").onSnapshot((snapshotChange) => {
-    //   this.dados = [];
-    //   firebaseDb.ref("/codigos").on("value", (snapshot) => {
-    //     snapshot.forEach((childSnapshot) => {
-    //       if (childSnapshot.val().email === user.email) {
-    //         this.userOn = childSnapshot.val().displayName;
-    //       }
-    //     });
-    //   });
-    // });
-    // if (this.$q.localStorage.getItem("correios")) {
-    //   this.codigosUser = this.$q.localStorage.getItem("correios");
-    // } else {
-    //   this.$q.localStorage.set("correios", "");
-    // }
   },
   methods: {
     async verificarCodigo() {
       this.salvaCodigodlg = true;
-      // var rastreio = this.codRastreio;
-      // const self = this;
-      // this.dadosCod.forEach(function (snapshot) {
-      //   var obj = snapshot.val();
-      //   if (obj.codigo === rastreio) {
-      //     console.log("codiigos salvos: ", snapshot.val().codigo);
-      //     console.log(obj.codigo, " - ", rastreio);
-      //     self.prop = snapshot.val();
-      //   }
-      // });
-      // console.log("aaaaaaaaaaa ", self.codRastreio, " -- ", this.codRastreio);
-      // if (self.codRastreio === this.codRastreio) {
-      //   console.log("entrou no false ", this.codExiste);
-      //   this.pesquisaRastreio();
-      // } else {
-      //   this.salvaCodigodlg = true;
-      //   console.log("entrou no true ", this.codExiste);
-      // }
     },
     async atualizar() {
       get(child(firebaseDb, `codigos`))
@@ -313,10 +237,6 @@ export default defineComponent({
           console.error(error);
         });
     },
-    limparHistorico() {
-      // this.$q.localStorage.set("correios", "");
-      // this.codigosUser = [];
-    },
     formataData(dt) {
       return date.formatDate(dt, "DD/MM/YYYY HH:MM");
     },
@@ -327,9 +247,6 @@ export default defineComponent({
     },
     async removeCodigo(cod) {
       cod.desc1 = cod.desc;
-      // var newArray = this.codigosUser.filter((item) => item !== cod);
-      // this.$q.localStorage.set("correios", newArray);
-      // this.codigosUser = this.$q.localStorage.getItem("correios");
       if (cod.desc === "") {
         cod.desc1 = cod.codigo;
       }
@@ -395,15 +312,6 @@ export default defineComponent({
               this.pesquisou = true;
               this.desc = "";
             }
-            // var newArray = this.codigosUser.filter(
-            //   (item) => item === this.codRastreio
-            // );
-            // if (newArray.length > 0) {
-            // } else {
-            //   this.codigosUser.push(this.codRastreio);
-            //   this.$q.localStorage.set("correios", this.codigosUser);
-            //   this.codigosUser = this.$q.localStorage.getItem("correios");
-            // }
             this.$q.loading.hide();
           } else {
             this.$q.loading.hide();
