@@ -4,8 +4,6 @@ APP de estudo utilizando api de rastreio dos correios e Firebase Realtime Databa
 
 Link de acesso: https://boracorreio.web.app/
 
-Nota: App criado específicamente para uso mobile, a visualização não fica perfeita no desktop.
-
 ## Clone o projeto e rode o comando:
 
 ```bash
