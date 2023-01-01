@@ -293,10 +293,9 @@ export default defineComponent({
       });
       var novoCod = 0;
       this.$axios
-        .get(
-          `https://govbrpf.herokuapp.com/correios/${this.codRastreio.toUpperCase()}`
-        )
+        .get(`http://localhost:3000/correios/${this.codRastreio.toUpperCase()}`)
         .then((response) => {
+          console.log("aaaa");
           this.dadosEncomenda = response.data;
           if (this.dadosEncomenda) {
             if (param === "S") {
