@@ -293,9 +293,10 @@ export default defineComponent({
       });
       var novoCod = 0;
       this.$axios
-        .get(`http://localhost:3000/correios/${this.codRastreio.toUpperCase()}`)
+        .get(
+          `https://painelgov-api.iober.com.br/correios/${this.codRastreio.toUpperCase()}`
+        )
         .then((response) => {
-          console.log("aaaa");
           this.dadosEncomenda = response.data;
           if (this.dadosEncomenda) {
             if (param === "S") {
