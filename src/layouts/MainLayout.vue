@@ -110,7 +110,7 @@ export default defineComponent({
   },
   created() {
     firebase.auth().onAuthStateChanged((user) => {
-      this.$q.sessionStorage.set("uid_c", user.uid);
+      this.$q.sessionStorage.set("uid_c", user.email);
       this.$q.sessionStorage.set("name_c", user.displayName);
     });
   },

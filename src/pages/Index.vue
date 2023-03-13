@@ -225,7 +225,6 @@ export default defineComponent({
         .database()
         .ref("codigos")
         .on("value", (snapshot) => {
-          console.log("snap ", snapshot);
           if (snapshot.exists()) {
             this.dados = snapshot.val();
             this.dadosCod = snapshot;
@@ -313,7 +312,7 @@ export default defineComponent({
                   uid: this.uid,
                   codigo: this.codRastreio,
                   desc: this.desc,
-                  user: this.user,
+                  user: this.uid,
                 });
               this.pesquisou = true;
               this.desc = "";

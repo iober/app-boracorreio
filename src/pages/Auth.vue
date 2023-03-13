@@ -286,7 +286,7 @@ export default {
         // signInSuccessUrl: "/#/todo",
         signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
       };
-      ui.start("#firebaseui-auth-container", uiConfig);
+      // ui.start("#firebaseui-auth-container", uiConfig);
     },
     logout() {
       var vm = this;
