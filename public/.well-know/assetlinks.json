@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.web.boracorreios.twa",
+      "sha256_cert_fingerprints": [
+        "1C:7C:8B:2B:67:1C:CD:F4:34:EF:9D:EB:96:9B:3B:42:F5:12:EB:58:2E:9B:3B:AD:59:B7:14:7C:9F:FB:ED:9B"
+      ]
+    }
+  }
+]

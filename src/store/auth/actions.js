@@ -1,7 +1,6 @@
 /* eslint-disable no-empty-pattern */
 import { firebase, firebaseAuth, firebaseDb } from "boot/firebase";
-import { child, get, set, ref } from "firebase/database";
-import { Notify, LocalStorage, SessionStorage } from "quasar";
+import { Notify } from "quasar";
 
 export function loginUser({}, payload) {
   firebaseAuth
@@ -25,7 +24,8 @@ export function loginUserWithGoogleAuth() {
       // var token = result.credential.accessToken
       // The signed-in user info.
       var user = result.user;
-      // generateUserBase({ name: user.displayName, email: user.email });
+      generateUserBase({ name: user.displayName, email: user.email });
+      this.$router.push("/index");
       notifySuccess("Bem-Vindo!");
     })
     .catch((error) => {
@@ -87,15 +87,14 @@ export function handleAuthStateChange({ commit, dispatch, state }) {
   firebaseAuth.onAuthStateChanged((user) => {
     if (user) {
       let userId = firebaseAuth.currentUser.uid;
-
-      // firebaseDb.ref("users/" + userId).once("value", (snapshot) => {
-      //   let userDetails = snapshot.val();
-      //   commit("setUserDetails", {
-      //     userId: userId,
-      //     name: userDetails.name,
-      //     email: userDetails.email,
-      //   });
-      // });
+      firebaseDb.ref("users/" + userId).once("value", (snapshot) => {
+        let userDetails = snapshot.val();
+        commit("setUserDetails", {
+          userId: userId,
+          name: userDetails.name,
+          email: userDetails.email,
+        });
+      });
       dispatch("firebaseUpdateUser", {
         userId: userId,
         updates: {
@@ -118,23 +117,21 @@ export function handleAuthStateChange({ commit, dispatch, state }) {
 
 export function logoutUser() {
   firebaseAuth.signOut();
-  LocalStorage.set("loginOFF", "N");
-  this.$router.replace("/auth");
 }
 
 export function firebaseUpdateUser({}, payload) {
-  // if (payload.userId) {
-  //   firebaseDb.ref("users/" + payload.userId).update(payload.updates);
-  // }
+  if (payload.userId) {
+    firebaseDb.ref("users/" + payload.userId).update(payload.updates);
+  }
 }
 
 function generateUserBase(payload) {
   let userId = firebaseAuth.currentUser.uid;
-  // firebaseDb.ref("users/" + userId).set({
-  //   displayName: payload.name,
-  //   email: payload.email,
-  //   online: true,
-  // });
+  firebaseDb.ref("users/" + userId).set({
+    displayName: payload.name,
+    email: payload.email,
+    online: true,
+  });
 }
 
 function notifySuccess(message) {

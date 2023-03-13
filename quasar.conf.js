@@ -42,8 +42,7 @@ module.exports = configure(function (ctx) {
 
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
-      scopeHoisting: true,
-      vueRouterMode: "history",
+      vueRouterMode: "hash",
 
       // transpile: false,
       // publicPath: '/',
@@ -83,7 +82,7 @@ module.exports = configure(function (ctx) {
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
     framework: {
       config: {},
-
+      importStrategy: "auto",
       // iconSet: 'material-icons', // Quasar icon set
       // lang: 'en-US', // Quasar language pack
 
@@ -110,7 +109,7 @@ module.exports = configure(function (ctx) {
 
     // https://quasar.dev/quasar-cli/developing-ssr/configuring-ssr
     ssr: {
-      pwa: true,
+      pwa: false,
 
       // manualStoreHydration: true,
       // manualPostHydrationTrigger: true,
@@ -121,11 +120,11 @@ module.exports = configure(function (ctx) {
       maxAge: 1000 * 60 * 60 * 24 * 30,
       // Tell browser when a file from the server should expire from cache (in ms)
 
-      chainWebpackWebserver(chain) {
-        chain
-          .plugin("eslint-webpack-plugin")
-          .use(ESLintPlugin, [{ extensions: ["js"] }]);
-      },
+      // chainWebpackWebserver(chain) {
+      //   chain
+      //     .plugin("eslint-webpack-plugin")
+      //     .use(ESLintPlugin, [{ extensions: ["js"] }]);
+      // },
 
       middlewares: [
         ctx.prod ? "compression" : "",
@@ -135,6 +134,7 @@ module.exports = configure(function (ctx) {
 
     // https://quasar.dev/quasar-cli/developing-pwa/configuring-pwa
     pwa: {
+      workboxPluginMode: "GenerateSW", // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {
         skipWaiting: true,
         clientsClaim: true,
@@ -142,20 +142,24 @@ module.exports = configure(function (ctx) {
 
       // for the custom service worker ONLY (/src-pwa/custom-service-worker.[js|ts])
       // if using workbox in InjectManifest mode
-      chainWebpackCustomSW(chain) {
-        chain
-          .plugin("eslint-webpack-plugin")
-          .use(ESLintPlugin, [{ extensions: ["js"] }]);
-      },
+      // chainWebpackCustomSW(chain) {
+      //   chain
+      //     .plugin("eslint-webpack-plugin")
+      //     .use(ESLintPlugin, [{ extensions: ["js"] }]);
+      // },
 
       manifest: {
         name: `Bora Correio`,
         short_name: `Bora Correio`,
         description: `APP de estudo utilizando api de rastreio dos correios`,
-        display: "standalone",
+        display: "minimal-ui",
+        start_url: "https://boracorreio.firebaseapp.com/auth",
         orientation: "portrait",
         background_color: "#ffffff",
+        categories: ["productivity", "utilities"],
         theme_color: "#027be3",
+        lang: "pt",
+        display_override: ["minimal-ui"],
         icons: [
           {
             src: "icons/icon.png",
@@ -218,18 +222,18 @@ module.exports = configure(function (ctx) {
       },
 
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
-      chainWebpackMain(chain) {
-        chain
-          .plugin("eslint-webpack-plugin")
-          .use(ESLintPlugin, [{ extensions: ["js"] }]);
-      },
+      // chainWebpackMain(chain) {
+      //   chain
+      //     .plugin("eslint-webpack-plugin")
+      //     .use(ESLintPlugin, [{ extensions: ["js"] }]);
+      // },
 
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
-      chainWebpackPreload(chain) {
-        chain
-          .plugin("eslint-webpack-plugin")
-          .use(ESLintPlugin, [{ extensions: ["js"] }]);
-      },
+      // chainWebpackPreload(chain) {
+      //   chain
+      //     .plugin("eslint-webpack-plugin")
+      //     .use(ESLintPlugin, [{ extensions: ["js"] }]);
+      // },
     },
   };
 });

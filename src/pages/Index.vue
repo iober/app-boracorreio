@@ -191,10 +191,9 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 import { date } from "quasar";
-import { firebaseDb, firebase } from "boot/firebase";
-import { child, get, set, remove } from "firebase/database";
+import { firebase } from "boot/firebase";
 export default defineComponent({
   name: "PageIndex",
   data() {
@@ -222,8 +221,11 @@ export default defineComponent({
       this.salvaCodigodlg = true;
     },
     async atualizar() {
-      get(child(firebaseDb, `codigos`))
-        .then((snapshot) => {
+      firebase
+        .database()
+        .ref("codigos")
+        .on("value", (snapshot) => {
+          console.log("snap ", snapshot);
           if (snapshot.exists()) {
             this.dados = snapshot.val();
             this.dadosCod = snapshot;
@@ -232,9 +234,6 @@ export default defineComponent({
             this.dadosCod = [];
             console.log("No data available");
           }
-        })
-        .catch((error) => {
-          console.error(error);
         });
     },
     formataData(dt) {
@@ -271,8 +270,15 @@ export default defineComponent({
           },
         })
         .onOk(() => {
-          remove(child(firebaseDb, "codigos/" + cod.codigo));
-          this.atualizar();
+          var adaRef = firebase.database().ref("codigos/" + cod.codigo);
+          adaRef
+            .remove()
+            .then(function () {
+              console.log("Remove succeeded.");
+            })
+            .catch(function (error) {
+              console.log("Remove failed: " + error.message);
+            });
         })
         .onCancel(() => {
           // console.log('Cancel')
@@ -300,12 +306,15 @@ export default defineComponent({
           this.dadosEncomenda = response.data;
           if (this.dadosEncomenda) {
             if (param === "S") {
-              set(child(firebaseDb, "codigos/" + this.codRastreio), {
-                uid: this.uid,
-                codigo: this.codRastreio,
-                desc: this.desc,
-                user: this.user,
-              });
+              firebase
+                .database()
+                .ref("codigos/" + this.codRastreio)
+                .set({
+                  uid: this.uid,
+                  codigo: this.codRastreio,
+                  desc: this.desc,
+                  user: this.user,
+                });
               this.pesquisou = true;
               this.desc = "";
             } else {

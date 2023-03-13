@@ -120,7 +120,7 @@
 
 <script>
 import { mapActions } from "vuex";
-import firebase from "firebase/compat/app";
+import firebase from "firebase";
 import * as firebaseui from "firebaseui";
 import "firebaseui/dist/firebaseui.css";
 export default {

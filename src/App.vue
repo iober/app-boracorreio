@@ -1,10 +1,13 @@
 <template>
-  <router-view />
+  <div id="q-app">
+    <router-view />
+  </div>
 </template>
+
 <script>
-import { defineComponent } from "vue";
 import { mapActions } from "vuex";
-export default defineComponent({
+
+export default {
   name: "App",
   methods: {
     ...mapActions("auth", ["handleAuthStateChange"]),
@@ -12,5 +15,5 @@ export default defineComponent({
   mounted() {
     this.handleAuthStateChange();
   },
-});
+};
 </script>
