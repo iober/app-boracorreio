@@ -109,9 +109,10 @@
                 e.descricao
               }}</q-item-label>
               <q-item-label caption>{{ e.detalhe }}</q-item-label>
-              <q-item-label caption>{{
-                formataData(e.dtHrCriado)
-              }}</q-item-label>
+              <q-item-label caption>
+                {{ e.unidade.nome }} -
+                {{ formataData(e.dtHrCriado) }}</q-item-label
+              >
               <q-item-label
                 v-if="e.codigo === 'OEC' && index == 0"
                 style="font-size: 12px"
@@ -283,7 +284,6 @@ export default defineComponent({
           // console.log('Cancel')
         });
     },
-    // https://proxyapp.correios.com.br/v1/sro-rastro/LB493321394HK
     async salvarCodigo(param) {
       if (param === "S") {
         this.pesquisaRastreio(param);
